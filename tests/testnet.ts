@@ -13,13 +13,13 @@ async function prepare(){
   const storage=await sdk.Storage.open();log('OPFS storage worker ready.');
   let gap=true;try{gap=await sdk.bootnodeRequired(RPC,storage,{contractConfig:config});}catch(e){if(!(e instanceof Error) || !e.message.toLowerCase().includes('sync gap'))throw e;}log(`Historical archive required: ${gap}; official archive fallback enabled.`);
   const client=await sdk.Client.new({rpcUrl:RPC,storage,contractConfig:config,circuitLock,circuitsBaseUrl:new URL('/spp/dist/circuits/',location.origin).href,bootnodeUrl:BOOTNODE});
-  for(let attempt=0;;attempt++){try{await client.sync();break;}catch(e){if(attempt>=2 || !(e instanceof Error) || !e.message.toLowerCase().includes('sync gap'))throw e;log('RPC history changed during pagination; retrying read-only synchronization.');}}await client.backgroundSync();log('Pool synchronized; prover worker configured with trusted fingerprints.');
+  for(let attempt=0;;attempt++){try{await client.sync();break;}catch(e){if(attempt>=4 || !(e instanceof Error) || !/sync gap|missing field .events./i.test(e.message))throw e;log('Transient RPC pagination error; retrying read-only synchronization.');await new Promise(resolve=>setTimeout(resolve,1000));}}await client.backgroundSync();log('Pool synchronized; prover worker configured with trusted fingerprints.');
 return client;
 }
 document.querySelector('#prepare')!.addEventListener('click',async()=>{try{prepared??=prepare();await prepared;log('READY: synchronization complete. You can start the real flow.');}catch(e){prepared=undefined;log('SYNC FAILED: '+(e instanceof Error?e.message:String(e)));}});
 let running=false;
 document.querySelector('#start')!.addEventListener('click',async()=>{
- if(running)return;running=true;
+ if(running)return;running=true;log('STARTED: real Testnet flow requested by user.');
  const report:Record<string,unknown>={startedAt:new Date().toISOString(),network:'testnet',pool:POOL};
  const save=()=>fetch('/__testnet/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(report,(_,v)=>typeof v==='bigint'?v.toString():v)});
  try {
@@ -29,7 +29,7 @@ document.querySelector('#start')!.addEventListener('click',async()=>{
    const key=Keypair.fromSecret(wallets[role].secret);
    return {getPublicKey:async()=>key.publicKey(),signMessage:async(message)=>({signedMessage:Buffer.from(key.sign(hash(Buffer.from('Stellar Signed Message:\n'+message)))).toString('base64'),signerAddress:key.publicKey()}),signAuthEntry:async(value)=>({signedAuthEntry:Buffer.from(key.sign(hash(Buffer.from(value,'base64')))).toString('base64'),signerAddress:key.publicKey()}),signTransaction:async(value)=>{const tx=TransactionBuilder.fromXDR(value,NETWORK);tx.sign(key);return {signedTxXdr:tx.toXDR(),signerAddress:key.publicKey()};}};
   };
-  const open=(owner:string,payer=owner)=>client.account({networkPassphrase:NETWORK,userAddress:wallets[owner].publicKey,signerAddress:wallets[payer].publicKey},signer(payer));
+  const open=async(owner:string,payer=owner)=>{const account=await client.account({networkPassphrase:NETWORK,userAddress:wallets[owner].publicKey,signerAddress:wallets[payer].publicKey},signer(payer));if(owner===payer)await account.derivePrivacyKeys();return account;};
   const accepted=(r:PoolExecuteResult)=>{if(r.status!=='ok')throw new Error(r.message||r.status);return r.hashes;};
   for(const role of ['education','opensource','community']) {
    const account=await open(role);if(!await account.isRegistered()){await account.registerPublicKeys();log(`${role}: privacy keys registered on-chain.`);}else log(`${role}: privacy keys already registered.`);account.free();await client.sync();

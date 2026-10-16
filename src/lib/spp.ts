@@ -69,6 +69,7 @@ async function bind(owner:string,signer:string) {
  if(!client) throw new Error('Activa primero el SDK.');
  pool?.free(); account?.free();
  account=await client.account({networkPassphrase:NETWORK,userAddress:owner,signerAddress:signer},await adapter(owner,signer));
+ if(owner===signer) await account.derivePrivacyKeys();
  pool=await account.pool({poolContract:POOL});
 }
 export async function register(owner:string) {await bind(owner,owner);return account.registerPublicKeys();}
