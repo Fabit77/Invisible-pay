@@ -27,3 +27,7 @@ Una búsqueda de direcciones ausentes no prueba ausencia de todas las filtracion
 Montos únicos, donaciones inmediatamente posteriores al depósito, retiros inmediatos y pocos participantes permiten inferencias. Tres depósitos solo ilustran un conjunto no trivial, sin medir entropía efectiva; múltiples entradas pueden ser controladas por una misma persona. El ensayo usa cuentas administradas localmente por el mismo operador, por lo que no demuestra independencia organizativa ni resistencia Sybil.
 
 ASP blocklist centralizada: el administrador puede modificar elegibilidad. No se selecciona pool GVK traceable. Setup Groth16 `local`: fingerprints verifican integridad, no eliminación del toxic waste ni seguridad de la ceremonia. SPP experimental/no auditado. OPFS puede borrarse; recuperación requiere firma determinista y acceso al historial. Nunca usar fondos reales.
+
+## Firmante automática opcional (predeterminada en Testnet)
+
+Cuenta aleatoria en memoria del navegador, financiada por Friendbot sin transferencia desde el propietario. Solo paga y autoriza transferencias internas al pool fijado. No deriva claves del propietario. No es un relayer y no oculta la IP al RPC. La sesión reutiliza su source público, por lo que varias donaciones son vinculables entre sí. Al recargar se pierde su clave desechable. La clave no se distribuye en el bundle ni se guarda en Vercel o GitHub. La validación automatizada del adaptador no sustituye una prueba completa desde producción.

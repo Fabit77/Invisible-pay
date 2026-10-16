@@ -34,7 +34,7 @@ npm run build
 3. Conecta cada beneficiario en ShadowDonate y registra sus claves públicas SPP. Configura las direcciones en `.env.local` usando las variables de `.env.example`.
 4. Conecta la donante, firma la derivación oficial de claves y deposita XLM. Este depósito es público.
 5. Para una demo con conjunto no trivial, repite depósitos desde al menos otras dos wallets independientes. Tres wallets no prueban anonimato fuerte.
-6. Conserva a la donante conectada en ShadowDonate, selecciona la firmante independiente en Freighter y escribe su dirección en el formulario.
+6. Conserva a la donante conectada y seleccionada en Freighter. La opción «Usar firmante automática de Testnet» viene activada: pulsa «Preparar firmante automática» para crear una cuenta desechable y financiarla directamente con Friendbot. Alternativamente desmarca esa opción y configura una firmante manual en Freighter.
 7. Selecciona causa, monto y confirma la transferencia. La prueba se genera en el navegador, y el SDK transmite la transacción firmada a Testnet.
 8. Usa el inspector RPC para comprobar hash, SUCCESS, pool, ext_amount, source, argumentos y ausencia de direcciones protegidas en XDR. Descarga el reporte público.
 9. Conecta la beneficiaria, sincroniza y comprueba su incremento de saldo privado. Un retiro posterior publica monto y destinatario.
@@ -67,3 +67,11 @@ El operador RPC puede correlacionar IP y tiempos; el registro público vincula w
 ## Despliegue
 
 Vercel: proyecto `shadowdonate` creado en el equipo del usuario; publicado en https://shadowdonate.vercel.app; pruebas funcionales de producción pendientes. [Configuración](docs/DEPLOYMENT.md).
+
+## Firmante automática de Testnet
+
+La cuenta se genera mediante `Keypair.random()` en el navegador y se financia directamente con Friendbot. Solo su dirección pública se envía a Friendbot/Horizon/RPC. Su clave permanece en memoria de la pestaña; no se persiste ni se envía al servidor. Al recargar, prepara otra firmante; las notas del propietario siguen almacenadas en OPFS. No deposites fondos en esta cuenta ni la uses con activos reales.
+
+El botón «Donar en privado» autoriza que esta cuenta firme la transacción interna; Freighter sigue sirviendo para conectar al propietario, derivar sus claves y depositar. La firmante automática rechaza derivaciones de claves, autorizaciones separadas y envelopes que no tengan una única llamada `transact` con ext_amount=0 al pool fijado. La autorización del contrato debe ser por source account. Se comprueba la red antes de firmar.
+
+Las donaciones que reutilizan una misma firmante durante la sesión son correlacionables entre sí. Friendbot/RPC pueden observar IP y tiempos. Una cuenta distinta no garantiza anonimato. Pruebas automatizadas cubren firma Ed25519 real, financiación simulada y rechazo de pagos públicos; una donación desde producción con este adaptador sigue pendiente de ejecución por el usuario.

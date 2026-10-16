@@ -6,6 +6,8 @@ import type { Client, Account, PrivatePool, Storage, WalletSigner } from 'stella
 import { TransactionBuilder, scValToNative, Address, StrKey } from '@stellar/stellar-sdk';
 import { BOOTNODE, NETWORK, POOL, RPC, VERIFIER, config, circuitLock } from './config';
 import { differentSigner } from './amount';
+import { automaticSignerAddress, automaticWalletSigner, prepareAutomaticSigner } from './automatic-signer';
+export { prepareAutomaticSigner };
 type SDK=typeof import('stellar-private-payments');
 let sdk:SDK; let client:Client; let storage:Storage; let account:Account; let pool:PrivatePool;
 export async function testnet() {
@@ -36,6 +38,7 @@ export async function initialize(allowArchive:boolean) {
  } catch(error) {created.dispose();throw error;}
 }
 async function adapter(owner:string,signer:string):Promise<WalletSigner> {
+ if(owner!==signer && signer===automaticSignerAddress()) return automaticWalletSigner(owner);
  const base=new FreighterSigner();
  return {
   getPublicKey:()=>base.getPublicKey(),
@@ -82,7 +85,7 @@ export async function publicBalance(owner:string) {
 export async function deposit(owner:string,amount:bigint) {await bind(owner,owner);return pool.deposit(amount);}
 export async function donate(owner:string,signer:string,recipient:string,amount:bigint) {
  differentSigner(owner,signer); if(!StrKey.isValidEd25519PublicKey(signer)||!StrKey.isValidEd25519PublicKey(recipient)) throw new Error('Dirección Stellar inválida.');
- const active=await getAddress();if(active.address!==signer) throw new Error('Selecciona la cuenta firmante en Freighter, conservando al donante conectado en ShadowDonate.');
+ if(signer!==automaticSignerAddress()) {const active=await getAddress();if(active.address!==signer) throw new Error('Selecciona la cuenta firmante en Freighter, conservando al donante conectado en ShadowDonate.');}
  await client.sync(); const lookup=await client.recipientLookup(recipient);
  if(!lookup.registryFullySynced || !lookup.entry) throw new Error('Beneficiario sin claves registradas o registry sin sincronizar.');
  await bind(owner,signer);if(await pool.balance()<amount) throw new Error('Saldo privado insuficiente.');
