@@ -18,7 +18,7 @@ Claves de notas, montos privados, blindings, rutas Merkle y pruebas SMT de no pe
 
 ## Comprobación
 
-Se inspeccionan envelope, auth y result metadata; búsqueda de los bytes de wallets protegidas; source distinto; parámetros externos; pool y verificador en estado on-chain. La aceptación de Groth16 se infiere del éxito de un pool cuyo código auditado exige verificarla. No es una verificación independiente de la prueba fuera del contrato.
+Se inspeccionan envelope, auth y result metadata; búsqueda de los bytes de wallets protegidas; source distinto; parámetros externos; pool y verificador en estado on-chain. La aceptación de Groth16 se infiere del éxito de un pool cuyo código auditado exige verificarla. El inspector web no vuelve a calcular la prueba. En el ensayo documentado se hizo además una simulación independiente del verificador con la misma prueba pública: aceptó la original y rechazó una raíz alterada; esto no equivale a una auditoría criptográfica ni a una segunda transacción.
 
 Una búsqueda de direcciones ausentes no prueba ausencia de todas las filtraciones semánticas o correlaciones. El resultado debe acompañarse de revisión de eventos, autorizaciones y argumentos. El estado actual del contrato leído por el inspector no sustituye una instantánea histórica; conservar la evidencia contemporánea.
 

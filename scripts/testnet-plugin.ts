@@ -8,6 +8,7 @@ export function testnetPlugin():Plugin {return {name:'local-testnet-fixtures',co
   res.setHeader('Cache-Control','no-store');res.setHeader('Content-Type','application/json');
   try {
    if(req.url==='/__testnet/wallets' && req.method==='GET'){res.end(await readFile('.private/wallets.json'));return;}
+   if(req.url==='/__testnet/report' && req.method==='GET'){res.end(await readFile('.private/testnet-result.json'));return;}
    if(req.url==='/__testnet/report' && req.method==='POST') {let body='';for await(const part of req){body+=part;if(body.length>2_000_000)throw new Error('Report too large');}await writeFile('.private/testnet-result.json',body,{mode:0o600});res.end('{"saved":true}');return;}
    res.statusCode=404;res.end();
   }catch{res.statusCode=500;res.end('{"error":"Local fixture unavailable"}');}

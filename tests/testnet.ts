@@ -18,6 +18,26 @@ return client;
 }
 document.querySelector('#prepare')!.addEventListener('click',async()=>{try{prepared??=prepare();await prepared;log('READY: synchronization complete. You can start the real flow.');}catch(e){prepared=undefined;log('SYNC FAILED: '+(e instanceof Error?e.message:String(e)));}});
 let running=false;
+document.querySelector('#recover')!.addEventListener('click',async()=>{
+ try {
+  log('Auditing existing transaction; no new transactions will be sent.');
+  const report=await (await fetch('/__testnet/report')).json();
+  const wallets=await (await fetch('/__testnet/wallets')).json();
+  report.evidence=await inspect(report.transferHashes[0],wallets.donor.publicKey,wallets.education.publicKey);
+  log(`RPC SUCCESS; ledger ${report.evidence.ledger}; public XDR privacy checks passed.`);
+  prepared??=prepare();const client=await prepared;
+  const key=Keypair.fromSecret(wallets.education.secret);
+  const refuse=async()=>{throw new Error('Read-only audit cannot sign transactions.');};
+  const account=await client.account({networkPassphrase:NETWORK,userAddress:key.publicKey(),signerAddress:key.publicKey()},{getPublicKey:async()=>key.publicKey(),signMessage:async message=>({signedMessage:Buffer.from(key.sign(hash(Buffer.from('Stellar Signed Message:\n'+message)))).toString('base64'),signerAddress:key.publicKey()}),signTransaction:refuse,signAuthEntry:refuse});
+  await account.derivePrivacyKeys();const pool=await account.pool({poolContract:POOL});
+  report.recipientBalance=String(await pool.balance());
+  if(report.recipientBalance!=='10000000')throw new Error('Recipient balance differs from expected first donation of 1 XLM.');
+  report.status='SUCCESS';delete report.error;report.recoveredAt=new Date().toISOString();
+  await fetch('/__testnet/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(report)});
+  pool.free();account.free();
+  log(`SUCCESS. Verified donation: ${report.transferHashes[0]}`);log('Recipient decrypted and discovered received notes: balance 1 XLM.');
+ }catch(e){log('AUDIT FAILED: '+(e instanceof Error?e.message:String(e)));}
+});
 document.querySelector('#start')!.addEventListener('click',async()=>{
  if(running)return;running=true;log('STARTED: real Testnet flow requested by user.');
  const report:Record<string,unknown>={startedAt:new Date().toISOString(),network:'testnet',pool:POOL};

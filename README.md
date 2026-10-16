@@ -6,7 +6,7 @@ Aplicación educativa React/TypeScript/Vite/Tailwind para donar mediante notas p
 
 ## Estado verificable
 
-Integración implementada; entrega aún incompleta. No hay hash de donación confirmado. URL publicada: https://shadowdonate.vercel.app (prueba funcional completa pendiente). Consulta [evidencia](docs/TESTNET_EVIDENCE.md). El documento original de Notion no pudo consultarse; se siguieron los requisitos proporcionados por el usuario, sin inferir condiciones adicionales del desafío.
+Donación privada real confirmada en ledger 5232993: [`53e2a651…7f69954`](https://stellar.expert/explorer/testnet/tx/53e2a6517f620081fa543c125989ec8ef1dcaf4e0d65490656221d5847f69954). Prueba Groth16 aceptada, firmante independiente y recepción privada de 1 XLM comprobados con cuentas desechables. URL publicada: https://shadowdonate.vercel.app. Entrega aún incompleta: falta validar el flujo Freighter completo desde producción. Consulta [evidencia](docs/TESTNET_EVIDENCE.md). El documento original de Notion no pudo consultarse; se siguieron los requisitos proporcionados por el usuario, sin inferir condiciones adicionales del desafío.
 
 ## Ejecutar
 
@@ -18,7 +18,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-El build comprueba SHA-256 del grafo witness y proving key contra `config/circuits.json` y copia el SDK estático manteniendo sus rutas relativas. No hace falta compilar Rust ni desplegar contratos nuevos.
+El build comprueba SHA-256 del R1CS, grafo witness y proving key contra `config/circuits.json` y copia el SDK estático manteniendo sus rutas relativas. No hace falta compilar Rust ni desplegar contratos nuevos.
 
 ```sh
 npm run lint
@@ -54,7 +54,9 @@ node scripts/create-test-wallets.mjs
 SHADOW_TESTNET=1 npm run dev
 ```
 
-Abre `http://127.0.0.1:5173/tests/testnet.html` y pulsa manualmente el botón del ensayo. Usa la misma criptografía y contratos reales, con un adaptador de firma local para cuentas desechables. No constituye una prueba de la integración Freighter. El endpoint local de fixtures solo se monta en desarrollo con la variable explícita; no se distribuye en producción. Los secretos se entregan únicamente a esa página de localhost y no a servicios de terceros. El resultado queda en `.private/testnet-result.json`.
+Abre `http://127.0.0.1:5173/tests/testnet.html` y pulsa manualmente el botón del ensayo. Usa la misma criptografía y contratos reales, con un adaptador de firma local para cuentas desechables. No constituye una prueba de la integración Freighter. El endpoint local de fixtures solo se monta en desarrollo con la variable explícita; no se distribuye en producción. Los secretos se entregan únicamente a esa página de localhost y no a servicios de terceros. El resultado queda en `.private/testnet-result.json`. Si una transferencia se confirmó pero falló una consulta posterior, usa «Verify existing donation and recipient (read only)»; no repitas la donación para recuperar el informe.
+
+La evidencia pública puede revalidarse sin claves con `node scripts/verify-donation.mjs`. Consulta el hash de referencia desde el inspector de la web sin conectar una wallet; comparar el propietario requiere sus datos locales, que no son públicos.
 
 ## Privacidad y límites
 

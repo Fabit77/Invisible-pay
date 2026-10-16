@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-10-16T22:08:37.023Z",
+  "url": "https://shadowdonate.vercel.app",
+  "checks": [
+    {
+      "file": "policy_tx_2_2_B.r1cs",
+      "sha256": "3cd79e47a124b99d3ec698dcf63938fe5bb51a05ff13b7b3d98a854336bbaa7c",
+      "verified": true
+    },
+    {
+      "file": "policy_tx_2_2_B.graph.bin",
+      "sha256": "d4dc29962f760ce9ed5ddbab3619e3c0502daa02d6b8a608d77df330cff6a397",
+      "verified": true
+    },
+    {
+      "file": "policy_tx_2_2_B_proving_key.bin",
+      "sha256": "16721797e783b728d82276ac2a333d18a7479ded69af5241556d20e0130e4244",
+      "verified": true
+    }
+  ]
+}

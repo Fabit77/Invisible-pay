@@ -30,7 +30,7 @@ SDK 0.2.1 construye witness y prueba en el prover worker local. Grafo witness y 
 - proving key: `16721797e783b728d82276ac2a333d18a7479ded69af5241556d20e0130e4244`
 - R1CS distribuido y verificado al build: `3cd79e47a124b99d3ec698dcf63938fe5bb51a05ff13b7b3d98a854336bbaa7c`
 
-Pool `CA73PEBSX2GXZSMMVL46PTCXY424AIMPXKI7WWUMYJXV22AVY2DXC6DQ` invoca verificador `CA66PGQD3OUO5R64CMOWL3FIRAQTWORLX36ZERALPPYOJ4ORETGFO3P5`; código en `contracts/circom-groth16-verifier/src/lib.rs`. La auditoría RPC confirmó esa relación; la aceptación de una prueba de ShadowDonate sigue pendiente de transacción exitosa.
+Pool `CA73PEBSX2GXZSMMVL46PTCXY424AIMPXKI7WWUMYJXV22AVY2DXC6DQ` invoca verificador `CA66PGQD3OUO5R64CMOWL3FIRAQTWORLX36ZERALPPYOJ4ORETGFO3P5`; código en `contracts/circom-groth16-verifier/src/lib.rs`. La auditoría RPC confirmó esa relación; la transacción `53e2a6517f620081fa543c125989ec8ef1dcaf4e0d65490656221d5847f69954` fue exitosa en ledger 5232993. Una simulación independiente de `verify` aceptó la misma prueba pública y rechazó una raíz alterada; ver `docs/TESTNET_EVIDENCE.md`.
 
 No revela directamente claves, rutas, montos privados ni receptores de notas. No oculta source, políticas, tiempos, fees, depósitos/retiros, ni protege de correlaciones externas.
 

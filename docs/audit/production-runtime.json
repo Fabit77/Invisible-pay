@@ -1,0 +1,14 @@
+{
+  "url": "https://shadowdonate.vercel.app",
+  "deployment": "dpl_2yVtZkq4XKXJvuQ5FVH8uv4aDdJJ",
+  "browser": "Codex in-app browser",
+  "publicInspector": {
+    "status": "SUCCESS",
+    "ledger": 5232993,
+    "hash": "53e2a6517f620081fa543c125989ec8ef1dcaf4e0d65490656221d5847f69954"
+  },
+  "sdkInitializationAndPoolSync": true,
+  "freighterEndToEnd": "pending user test",
+  "newTransactionFromProduction": "not performed",
+  "recordedAt": "2026-10-16T22:17:44.191887+00:00"
+}
