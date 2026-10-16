@@ -1,0 +1,175 @@
+{
+  "checkedAt": "2026-10-16T21:55:14.535Z",
+  "health": {
+    "status": "healthy",
+    "latestLedger": 5232824,
+    "latestLedgerCloseTime": "1792187707",
+    "oldestLedger": 5111865,
+    "oldestLedgerCloseTime": "1791582912",
+    "ledgerRetentionWindow": 120960
+  },
+  "latest": {
+    "sequence": 5232824,
+    "protocolVersion": 29,
+    "id": "59a2e24d7297376b92896db8d2ea11b9b4ce0907de75b39ca772efd6f055d4ea"
+  },
+  "entries": [
+    {
+      "id": "CA73PEBSX2GXZSMMVL46PTCXY424AIMPXKI7WWUMYJXV22AVY2DXC6DQ",
+      "liveUntilLedger": 5362886,
+      "wasmHash": "48af991c66a1122534bdb345fb3b2797322bd5f53dec44a8aa620a317950e291",
+      "storage": [
+        {
+          "key": [
+            "ASPMembership"
+          ],
+          "value": "CBIIM5NROBSQDS2NAZ32R3FUYZVALTSV5ZZSAQ46RPQWRM5RFBBWBC4O"
+        },
+        {
+          "key": [
+            "ASPMembershipWasmHash"
+          ],
+          "value": {
+            "0": 115,
+            "1": 140,
+            "2": 109,
+            "3": 7,
+            "4": 70,
+            "5": 163,
+            "6": 214,
+            "7": 198,
+            "8": 163,
+            "9": 227,
+            "10": 35,
+            "11": 18,
+            "12": 119,
+            "13": 110,
+            "14": 244,
+            "15": 83,
+            "16": 235,
+            "17": 14,
+            "18": 26,
+            "19": 224,
+            "20": 3,
+            "21": 77,
+            "22": 184,
+            "23": 207,
+            "24": 125,
+            "25": 136,
+            "26": 199,
+            "27": 218,
+            "28": 42,
+            "29": 88,
+            "30": 158,
+            "31": 166
+          }
+        },
+        {
+          "key": [
+            "ASPNonMembership"
+          ],
+          "value": "CARVREMY7J5M2LELIK6GDN24XUBGIBGLD5FL3NKXB7PIGAFKHY67JRUC"
+        },
+        {
+          "key": [
+            "ASPNonMembershipWasmHash"
+          ],
+          "value": {
+            "0": 128,
+            "1": 17,
+            "2": 165,
+            "3": 133,
+            "4": 205,
+            "5": 46,
+            "6": 170,
+            "7": 82,
+            "8": 98,
+            "9": 11,
+            "10": 83,
+            "11": 194,
+            "12": 60,
+            "13": 218,
+            "14": 255,
+            "15": 32,
+            "16": 44,
+            "17": 99,
+            "18": 71,
+            "19": 245,
+            "20": 225,
+            "21": 77,
+            "22": 37,
+            "23": 252,
+            "24": 218,
+            "25": 80,
+            "26": 179,
+            "27": 158,
+            "28": 180,
+            "29": 71,
+            "30": 249,
+            "31": 117
+          }
+        },
+        {
+          "key": [
+            "DepositsPaused"
+          ],
+          "value": false
+        },
+        {
+          "key": [
+            "KdfDomain"
+          ],
+          "value": "Nethermind"
+        },
+        {
+          "key": [
+            "Levels"
+          ],
+          "value": 20
+        },
+        {
+          "key": [
+            "MaximumDepositAmount"
+          ],
+          "value": "1000000000000"
+        },
+        {
+          "key": [
+            "PolicyFlags"
+          ],
+          "value": 2
+        },
+        {
+          "key": [
+            "Token"
+          ],
+          "value": "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC"
+        },
+        {
+          "key": [
+            "Verifier"
+          ],
+          "value": "CA66PGQD3OUO5R64CMOWL3FIRAQTWORLX36ZERALPPYOJ4ORETGFO3P5"
+        }
+      ]
+    },
+    {
+      "id": "CA66PGQD3OUO5R64CMOWL3FIRAQTWORLX36ZERALPPYOJ4ORETGFO3P5",
+      "liveUntilLedger": 5362883,
+      "wasmHash": "ac1c1a38199f5bfdbd4a56109ebdc99977d11343198b0ee511d3eca24ef15ace"
+    },
+    {
+      "id": "CARVREMY7J5M2LELIK6GDN24XUBGIBGLD5FL3NKXB7PIGAFKHY67JRUC",
+      "liveUntilLedger": 5362882,
+      "wasmHash": "8011a585cd2eaa52620b53c23cdaff202c6347f5e14d25fcda50b39eb447f975",
+      "storage": [
+        {
+          "key": [
+            "Root"
+          ],
+          "value": "0"
+        }
+      ]
+    }
+  ]
+}
