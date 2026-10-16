@@ -1,3 +1,4 @@
+import beneficiaries from '../../config/causes.json';
 import deployment from '../../config/deployments.json';
 import fingerprints from '../../config/circuits.json';
 import type { ContractConfigInput, CircuitLockInput } from 'stellar-private-payments';
@@ -9,7 +10,7 @@ export const circuitLock: CircuitLockInput = fingerprints;
 export const POOL = deployment.pools.find(p => p.asset.kind === 'native' && !('gvkMode' in p))!.poolContractId;
 export const VERIFIER = deployment.verifiers.B;
 export const causes = [
- {id:'education', name:'Educación tecnológica', category:'APRENDER', description:'Abrir caminos al conocimiento digital.', address:import.meta.env.VITE_CAUSE_EDUCATION || ''},
- {id:'opensource', name:'Código abierto', category:'CONSTRUIR', description:'Herramientas abiertas para todos.', address:import.meta.env.VITE_CAUSE_OPENSOURCE || ''},
- {id:'community', name:'Iniciativas comunitarias', category:'CONECTAR', description:'Ideas pequeñas. Impacto compartido.', address:import.meta.env.VITE_CAUSE_COMMUNITY || ''},
+ {id:'education', name:'Educación tecnológica', category:'APRENDER', description:'Abrir caminos al conocimiento digital.', address:import.meta.env.VITE_CAUSE_EDUCATION || beneficiaries.education},
+ {id:'opensource', name:'Código abierto', category:'CONSTRUIR', description:'Herramientas abiertas para todos.', address:import.meta.env.VITE_CAUSE_OPENSOURCE || beneficiaries.opensource},
+ {id:'community', name:'Iniciativas comunitarias', category:'CONECTAR', description:'Ideas pequeñas. Impacto compartido.', address:import.meta.env.VITE_CAUSE_COMMUNITY || beneficiaries.community},
 ];

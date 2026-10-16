@@ -28,7 +28,7 @@ SDK 0.2.1 construye witness y prueba en el prover worker local. Grafo witness y 
 
 - graph: `d4dc29962f760ce9ed5ddbab3619e3c0502daa02d6b8a608d77df330cff6a397`
 - proving key: `16721797e783b728d82276ac2a333d18a7479ded69af5241556d20e0130e4244`
-- R1CS fingerprint publicado (no se distribuye ni verifica localmente en este build): `3cd79e47a124b99d3ec698dcf63938fe5bb51a05ff13b7b3d98a854336bbaa7c`
+- R1CS distribuido y verificado al build: `3cd79e47a124b99d3ec698dcf63938fe5bb51a05ff13b7b3d98a854336bbaa7c`
 
 Pool `CA73PEBSX2GXZSMMVL46PTCXY424AIMPXKI7WWUMYJXV22AVY2DXC6DQ` invoca verificador `CA66PGQD3OUO5R64CMOWL3FIRAQTWORLX36ZERALPPYOJ4ORETGFO3P5`; código en `contracts/circom-groth16-verifier/src/lib.rs`. La auditoría RPC confirmó esa relación; la aceptación de una prueba de ShadowDonate sigue pendiente de transacción exitosa.
 

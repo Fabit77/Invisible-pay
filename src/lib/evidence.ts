@@ -1,10 +1,11 @@
+import { stellarRpc } from './rpc';
 import { contains as containsBytes, hex } from './bytes';
-import { Address, rpc, TransactionBuilder, scValToNative, StrKey, xdr } from '@stellar/stellar-sdk';
-import { NETWORK, POOL, RPC, VERIFIER, config } from './config';
+import { Address, TransactionBuilder, scValToNative, StrKey, xdr } from '@stellar/stellar-sdk';
+import { NETWORK, POOL, VERIFIER, config } from './config';
 export interface Evidence { hash:string; ledger:number; source:string; pool:string; verifier:string; extAmount:string; publicRecipient:string; nullifiers:string[]; commitments:string[]; proofAcceptedByPool:boolean; independentSigner:boolean; ownerBytesAbsent:boolean; recipientBytesAbsent:boolean; envelopeXdr:string; resultMetaXdr:string; events:string[]; checkedAt:string }
 export async function inspect(hash:string, owner:string, recipient?:string):Promise<Evidence> {
  if(!/^[a-f0-9]{64}$/i.test(hash)) throw new Error('Hash inválido.');
- const server=new rpc.Server(RPC);
+ const server=stellarRpc();
  const network=await server.getNetwork();
  if(network.passphrase!==NETWORK) throw new Error('RPC fuera de Testnet.');
  const result=await server.getTransaction(hash);

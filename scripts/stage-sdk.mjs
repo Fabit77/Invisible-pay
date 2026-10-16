@@ -9,7 +9,7 @@ await mkdir(dest,{recursive:true});
 await cp(`${source}/js`, `${dest}/js`, {recursive:true});
 await cp(`${source}/dist`, `${dest}/dist`, {recursive:true, filter: path => !path.includes('/dist/circuits/')});
 await mkdir(`${dest}/dist/circuits`,{recursive:true});
-const artifacts = [['graph.bin','policy_tx_2_2_B.graph.bin'],['proving_key.bin','policy_tx_2_2_B_proving_key.bin']];
+const artifacts = [['r1cs','policy_tx_2_2_B.r1cs'],['graph.bin','policy_tx_2_2_B.graph.bin'],['proving_key.bin','policy_tx_2_2_B_proving_key.bin']];
 for (const [key,file] of artifacts) {
  const data = await readFile(`${source}/dist/circuits/${file}`);
  const actual = createHash('sha256').update(data).digest('hex');

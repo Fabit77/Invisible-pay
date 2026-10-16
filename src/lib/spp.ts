@@ -1,8 +1,9 @@
+import { stellarRpc } from './rpc';
 import { contains as containsBytes } from './bytes';
 import { FreighterSigner } from 'stellar-private-payments/freighter';
 import { getNetworkDetails, getAddress } from '@stellar/freighter-api';
 import type { Client, Account, PrivatePool, Storage, WalletSigner } from 'stellar-private-payments';
-import { rpc, TransactionBuilder, scValToNative, Address, StrKey } from '@stellar/stellar-sdk';
+import { TransactionBuilder, scValToNative, Address, StrKey } from '@stellar/stellar-sdk';
 import { BOOTNODE, NETWORK, POOL, RPC, VERIFIER, config, circuitLock } from './config';
 import { differentSigner } from './amount';
 type SDK=typeof import('stellar-private-payments');
@@ -10,11 +11,11 @@ let sdk:SDK; let client:Client; let storage:Storage; let account:Account; let po
 export async function testnet() {
  const details=await getNetworkDetails();
  if(details.error || details.networkPassphrase!==NETWORK) throw new Error('Abre Freighter → Settings → Network → Testnet.');
- const network=await new rpc.Server(RPC).getNetwork();
+ const network=await stellarRpc().getNetwork();
  if(network.passphrase!==NETWORK) throw new Error('RPC fuera de Stellar Testnet.');
 }
 export async function initialize(allowArchive:boolean) {
- const network=await new rpc.Server(RPC).getNetwork();
+ const network=await stellarRpc().getNetwork();
  if(network.passphrase!==NETWORK) throw new Error('RPC fuera de Stellar Testnet.');
  if(!sdk) {
   const path=new URL('/spp/js/index.js',location.origin).href; sdk=await import(/* @vite-ignore */ path) as SDK;
