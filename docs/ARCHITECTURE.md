@@ -12,7 +12,7 @@ No backend de pruebas, base de datos centralizada, autenticación externa ni rel
 - Verificador: `CA66PGQD3OUO5R64CMOWL3FIRAQTWORLX36ZERALPPYOJ4ORETGFO3P5`.
 - Política: blocklist (flags 2), sin GVK trazable.
 
-Inicialización: init → Storage.open → bootnodeRequired → Client.new(config + circuitLock + circuitsBaseUrl) → sync/backgroundSync → account → pool. El RPC retenía el ledger del despliegue al auditarlo. Solo si surge un gap, el usuario puede autorizar el bootnode oficial `https://bootnode.dev-nethermind.xyz`; introduce confianza de integridad, disponibilidad y privacidad.
+Inicialización: init → Storage.open → bootnodeRequired → Client.new(config + circuitLock + circuitsBaseUrl) → sync/backgroundSync → account → pool. El RPC SDF retenía el ledger del despliegue, pero su paginación falló durante la reconstrucción. El RPC alternativo `https://soroban-rpc.testnet.stellar.gateway.fm`, listado en https://developers.stellar.org/docs/data/apis/rpc/providers, completó la sincronización sin backend adicional. Solo si surge un gap, el usuario puede autorizar el bootnode oficial `https://bootnode.dev-nethermind.xyz`; introduce confianza de integridad, disponibilidad y privacidad.
 
 `src/lib/spp.ts` controla Testnet y las firmas; `src/lib/evidence.ts` inspecciona la transacción RPC, envelope y metadata. `scripts/stage-sdk.mjs` publica assets sin transformar conservando imports relativos. No se añaden headers COOP/COEP sin necesidad comprobada en la versión distribuida. Las comprobaciones de producción siguen pendientes.
 

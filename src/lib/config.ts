@@ -2,7 +2,7 @@ import deployment from '../../config/deployments.json';
 import fingerprints from '../../config/circuits.json';
 import type { ContractConfigInput, CircuitLockInput } from 'stellar-private-payments';
 export const NETWORK = 'Test SDF Network ; September 2015';
-export const RPC = import.meta.env.VITE_STELLAR_RPC || 'https://soroban-testnet.stellar.org';
+export const RPC = import.meta.env.VITE_STELLAR_RPC || 'https://soroban-rpc.testnet.stellar.gateway.fm';
 export const BOOTNODE = import.meta.env.VITE_BOOTNODE_URL || 'https://bootnode.dev-nethermind.xyz';
 export const config: ContractConfigInput = deployment as ContractConfigInput;
 export const circuitLock: CircuitLockInput = fingerprints;

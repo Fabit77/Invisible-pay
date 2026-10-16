@@ -10,13 +10,13 @@ Circuito: `policy_tx_2_2_B`, Groth16 BN254, SPP 0.2.1.
 
 ## Comprobado
 
-`docs/audit/chain-state.json` conserva la lectura RPC del ledger 5232676: pool existente, depósitos no pausados, token XLM, flags 2, relación con verificador B, hash de código del pool y ASP no membership con root 0. Los fingerprints de graph/proving key coinciden en build.
+`docs/audit/chain-state.json` conserva la lectura RPC del ledger 5232824: pool existente, depósitos no pausados, token XLM, flags 2, relación con verificador B, hash de código del pool y ASP no membership con root 0. Los fingerprints de graph/proving key coinciden en build.
 
 ## Aún no comprobado
 
 Hash/explorer/source: pendientes. Prueba generada y aceptada por Soroban: pendiente. Tres depósitos confirmados: pendientes. ext_amount=0 y ausencia de wallet donante/receptora en envelope/auth/eventos/metadata: pendientes. Recepción privada, retiro, Freighter y funcionamiento desplegado: pendientes.
 
-El ensayo local cargó WASM y OPFS. Después de una interrupción, se reinició el servidor. La revisión automática requiere que el usuario pulse manualmente el botón del ensayo; no se ejecutó esa acción mediante otra vía.
+El ensayo local cargó WASM y OPFS y completó sincronización del pool usando el RPC Testnet de Gateway.fm tras reproducir errores de paginación en el RPC SDF. Después de una interrupción, se reinició el servidor. La revisión automática requiere que el usuario pulse manualmente el botón del ensayo; no se ejecutó esa acción mediante otra vía.
 
 Se crearon siete cuentas desechables financiadas por Friendbot por separado. Claves y dirección de la donante únicamente en `.private/wallets.json` (no versionado). Los reportes de prueba se guardan en `.private/testnet-result.json`; publicar solo la evidencia sanitizada, sin vincular donante con hash.
 
