@@ -14,7 +14,8 @@ export async function testnet() {
  if(network.passphrase!==NETWORK) throw new Error('RPC fuera de Stellar Testnet.');
 }
 export async function initialize(allowArchive:boolean) {
- await testnet();
+ const network=await new rpc.Server(RPC).getNetwork();
+ if(network.passphrase!==NETWORK) throw new Error('RPC fuera de Stellar Testnet.');
  if(!sdk) {
   const path=new URL('/spp/js/index.js',location.origin).href; sdk=await import(/* @vite-ignore */ path) as SDK;
   await sdk.default(); sdk.configureTelemetry({level:'error',sink:'ringBuffer',revealSensitive:false});

@@ -1,6 +1,6 @@
 # Despliegue Vercel
 
-Destino autorizado: GitHub `Fabit77/Invisible-pay`, Vercel team `fabits-projects`, proyecto `shadowdonate` (id `prj_IY8CTfaAGyEjmSF3jl0xNLSLHI8d`). Proyecto creado, Node 24.x, framework Vite, build `npm run build`, output `dist`. No hay URL de producción comprobada todavía.
+Destino autorizado: GitHub `Fabit77/Invisible-pay`, Vercel team `fabits-projects`, proyecto `shadowdonate` (id `prj_IY8CTfaAGyEjmSF3jl0xNLSLHI8d`). Proyecto creado, Node 24.x, framework Vite, build `npm run build`, output `dist`. URL publicada y HTTP 200 comprobado: https://shadowdonate.vercel.app. Despliegue READY; WASM responde application/wasm. La prueba funcional completa sigue pendiente.
 
 ## Variables públicas
 

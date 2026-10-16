@@ -6,7 +6,7 @@ Aplicación educativa React/TypeScript/Vite/Tailwind para donar mediante notas p
 
 ## Estado verificable
 
-Integración implementada; entrega aún incompleta. No hay hash de donación confirmado ni URL de producción verificada. Consulta [evidencia](docs/TESTNET_EVIDENCE.md). El documento original de Notion no pudo consultarse; se siguieron los requisitos proporcionados por el usuario, sin inferir condiciones adicionales del desafío.
+Integración implementada; entrega aún incompleta. No hay hash de donación confirmado. URL publicada: https://shadowdonate.vercel.app (prueba funcional completa pendiente). Consulta [evidencia](docs/TESTNET_EVIDENCE.md). El documento original de Notion no pudo consultarse; se siguieron los requisitos proporcionados por el usuario, sin inferir condiciones adicionales del desafío.
 
 ## Ejecutar
 
@@ -64,4 +64,4 @@ El operador RPC puede correlacionar IP y tiempos; el registro público vincula w
 
 ## Despliegue
 
-Vercel: proyecto `shadowdonate` creado en el equipo del usuario; publicación y pruebas de producción pendientes. [Configuración](docs/DEPLOYMENT.md).
+Vercel: proyecto `shadowdonate` creado en el equipo del usuario; publicado en https://shadowdonate.vercel.app; pruebas funcionales de producción pendientes. [Configuración](docs/DEPLOYMENT.md).

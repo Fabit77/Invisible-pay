@@ -6,3 +6,4 @@ public/spp/
 !.env.example
 .private/
 *.log
+.vercel
